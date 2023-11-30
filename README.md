@@ -21,4 +21,20 @@ Matplotlib, shap, lime and jupyter-lab / jupyter-notebook can be installed via a
 
 # Usage
 Set up jupyter-notebook / jupyter-lab so that the libraries are loaded in. This can be done by creating a conda/python environment with the prerequisites, activating that environment and then running jupyter. 
-Once the jupyter-notebook instance is running, open XAINN.ipynb and run each block one at a time, starting from the top. 
+Once the jupyter-notebook instance is running, open XAINN.ipynb and run each block one at a time, starting from the top.
+
+The training of models is not mandatory. At the bottom of the jupyter notebook, there is a short code snippet to import models into pre-existing ones. Do define models 1, 2 and 3 if you wish to use them, and then override their weights using the code snippet. Do note that the path may not be correct, and may require fixing. The model weights are found in the root directory of this repository (named Model X_2.pth).
+
+To obtain SHAP, LIME and Callback images, remember to run the snippets above and below "Train and Test functions" section AFTER importing the models. The hooks are detached upon model import.
+
+To get a batch of images, run the block
+  batch = next(iter(test_dataloader))
+  images, _ = batch
+
+To get callbacks from that batch of images, run
+  testsingleSet(images, _, model1, loss_fn)
+  testsingleSet(images, _, model2, loss_fn)
+  testsingleSet(images, _, model3, loss_fn)
+
+The function definitions are a bit over the place, but the majority of them can be found at the bottom of the document. The plotting functions can also save the images directly using the flag "saving = True" and giving a filename.
+
